@@ -1,184 +1,1552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>StudyMate — Your Study Companion</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyMate — Your Intelligent Study Workspace</title>
+
+    <meta
+        name="description"
+        content="StudyMate is an intelligent workspace for students, teachers and researchers."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="topbar">
-  <div class="brand">
-    <span class="brand-mark">✦</span>
-    <span class="brand-name">StudyMate</span>
-  </div>
-  <nav class="tabs" id="tabs">
-    <button class="tab-btn active" data-tab="timetable">Timetable</button>
-    <button class="tab-btn" data-tab="timer">Focus Timer</button>
-    <button class="tab-btn" data-tab="notes">Notes</button>
-    <button class="tab-btn" data-tab="flashcards">Flashcards</button>
-    <button class="tab-btn" data-tab="videos">Videos</button>
-  </nav>
-  <div class="streak-pill" id="streakPill">🔥 0 day streak</div>
-</header>
+<!-- =====================================================
+     ONBOARDING
+===================================================== -->
 
-<main>
+<div id="onboarding" class="onboarding">
 
-  <!-- TIMETABLE -->
-  <section class="panel active" id="panel-timetable">
-    <div class="panel-head">
-      <div>
-        <h1>Your week, at a glance</h1>
-        <p class="sub">Click any empty slot to plan a study block. Blocks light up amber when active, and turn green once you finish them.</p>
-      </div>
-      <div class="head-actions">
-        <select id="examSubjectSelect"></select>
-        <input type="date" id="examDateInput" />
-        <button class="btn btn-ghost" id="autoPlanBtn">Auto-plan to exam</button>
-      </div>
-    </div>
+    <div class="onboarding-glow glow-one"></div>
+    <div class="onboarding-glow glow-two"></div>
 
-    <div class="legend" id="subjectLegend"></div>
+    <div class="welcome-card">
 
-    <div class="grid-wrap">
-      <div class="grid" id="timetableGrid"></div>
-    </div>
-  </section>
+        <div class="brand-large">
+            <div class="brand-logo">✦</div>
 
-  <!-- TIMER -->
-  <section class="panel" id="panel-timer">
-    <div class="panel-head">
-      <div>
-        <h1>Focus session</h1>
-        <p class="sub">Pick a subject, set your time, and go dark on everything else.</p>
-      </div>
-    </div>
-
-    <div class="timer-layout">
-      <div class="timer-card">
-        <div class="timer-ring-wrap">
-          <svg viewBox="0 0 200 200" class="timer-ring">
-            <circle cx="100" cy="100" r="90" class="ring-bg"></circle>
-            <circle cx="100" cy="100" r="90" class="ring-progress" id="ringProgress"></circle>
-          </svg>
-          <div class="timer-display">
-            <span id="timerClock">25:00</span>
-            <span class="timer-label" id="timerSubjectLabel">No subject selected</span>
-          </div>
+            <div>
+                <h1>StudyMate</h1>
+                <p>Your intelligent study workspace</p>
+            </div>
         </div>
 
-        <div class="timer-controls">
-          <button class="btn btn-primary" id="startPauseBtn">Start</button>
-          <button class="btn btn-ghost" id="resetBtn">Reset</button>
+        <!-- EMAIL STEP -->
+
+        <div id="emailStep" class="onboarding-step">
+
+            <div class="welcome-icon">🧠</div>
+
+            <h2>Welcome to StudyMate</h2>
+
+            <p class="welcome-description">
+                Learn smarter, organize better and let StudyMate
+                become your personal academic workspace.
+            </p>
+
+            <label for="emailInput">
+                Email address
+            </label>
+
+            <input
+                id="emailInput"
+                type="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+            >
+
+            <button id="continueBtn" class="gradient-btn">
+                Continue
+                <span>→</span>
+            </button>
+
+            <p class="privacy-note">
+                No password required for this demo.
+            </p>
+
         </div>
-      </div>
 
-      <div class="timer-setup">
-        <label>Subject</label>
-        <select id="timerSubjectSelect"></select>
 
-        <label>Duration</label>
-        <div class="duration-chips" id="durationChips">
-          <button class="chip" data-min="15">15m</button>
-          <button class="chip active" data-min="25">25m</button>
-          <button class="chip" data-min="45">45m</button>
-          <button class="chip" data-min="60">60m</button>
+        <!-- ROLE STEP -->
+
+        <div id="roleStep" class="onboarding-step hidden">
+
+            <div class="welcome-icon">✨</div>
+
+            <h2>What brings you here?</h2>
+
+            <p class="welcome-description">
+                Choose your role so StudyMate can personalize
+                your workspace and tools.
+            </p>
+
+            <div class="role-grid">
+
+                <button class="role-card" data-role="student">
+
+                    <div class="role-icon student-icon">
+                        🎓
+                    </div>
+
+                    <div>
+                        <strong>Student</strong>
+
+                        <span>
+                            Learn, revise, practice and plan
+                        </span>
+                    </div>
+
+                    <b>→</b>
+
+                </button>
+
+
+                <button class="role-card" data-role="teacher">
+
+                    <div class="role-icon teacher-icon">
+                        👨‍🏫
+                    </div>
+
+                    <div>
+                        <strong>Teacher</strong>
+
+                        <span>
+                            Teach, create and organize
+                        </span>
+                    </div>
+
+                    <b>→</b>
+
+                </button>
+
+
+                <button class="role-card" data-role="researcher">
+
+                    <div class="role-icon researcher-icon">
+                        🔬
+                    </div>
+
+                    <div>
+                        <strong>Researcher</strong>
+
+                        <span>
+                            Research, analyze and discover
+                        </span>
+                    </div>
+
+                    <b>→</b>
+
+                </button>
+
+            </div>
+
         </div>
 
-        <label>Intention <span class="optional">(what does "done" look like?)</span></label>
-        <input type="text" id="timerIntention" placeholder="e.g. finish 2 practice problems" />
-
-        <div class="session-log">
-          <h3>Recent sessions</h3>
-          <ul id="sessionLogList"></ul>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <!-- NOTES -->
-  <section class="panel" id="panel-notes">
-    <div class="panel-head">
-      <div>
-        <h1>Notes → summaries → flashcards</h1>
-        <p class="sub">Paste or type your notes. StudyMate pulls out key points and can spin flashcards from them.</p>
-      </div>
-    </div>
-
-    <div class="notes-layout">
-      <div class="notes-editor">
-        <select id="noteSubjectSelect"></select>
-        <textarea id="noteInput" placeholder="Paste your notes, textbook paragraph, or lecture summary here..."></textarea>
-        <div class="notes-actions">
-          <button class="btn btn-primary" id="summarizeBtn">Summarize &amp; save</button>
-        </div>
-      </div>
-
-      <div class="notes-list" id="notesList">
-        <p class="empty-state">No notes yet — your saved summaries will appear here.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FLASHCARDS -->
-  <section class="panel" id="panel-flashcards">
-    <div class="panel-head">
-      <div>
-        <h1>Flashcards</h1>
-        <p class="sub">Cards you rate "hard" come back sooner. Cards you know well fade into the background.</p>
-      </div>
-      <button class="btn btn-ghost" id="addCardBtn">+ New card</button>
-    </div>
-
-    <div class="flash-stats" id="flashStats"></div>
-
-    <div class="flash-stage" id="flashStage">
-      <p class="empty-state">No cards due right now. Add one, or come back later.</p>
-    </div>
-  </section>
-
-  <!-- VIDEOS -->
-  <section class="panel" id="panel-videos">
-    <div class="panel-head">
-      <div>
-        <h1>Find a video for this</h1>
-        <p class="sub">Type whatever you're stuck on. StudyMate builds a targeted search instead of a generic one.</p>
-      </div>
-    </div>
-
-    <div class="video-search">
-      <input type="text" id="videoTopicInput" placeholder="e.g. integration by parts, Krebs cycle, big-O notation..." />
-      <button class="btn btn-primary" id="videoSearchBtn">Find videos</button>
-    </div>
-
-    <div class="video-quick-tags" id="videoQuickTags"></div>
-
-    <div class="video-results" id="videoResults"></div>
-  </section>
-
-</main>
-
-<div class="modal-backdrop" id="cardModalBackdrop">
-  <div class="modal">
-    <h2>New flashcard</h2>
-    <label>Subject</label>
-    <select id="cardSubjectSelect"></select>
-    <label>Front (question)</label>
-    <textarea id="cardFront" rows="2"></textarea>
-    <label>Back (answer)</label>
-    <textarea id="cardBack" rows="2"></textarea>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" id="cancelCardBtn">Cancel</button>
-      <button class="btn btn-primary" id="saveCardBtn">Save card</button>
-    </div>
-  </div>
 </div>
 
-<div class="toast" id="toast"></div>
+
+<!-- =====================================================
+     MAIN APPLICATION
+===================================================== -->
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo small">✦</div>
+
+            <div>
+                <h2>StudyMate</h2>
+                <span>AI Study Workspace</span>
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+            <div class="profile-info">
+                <strong data-user-email>
+                    StudyMate User
+                </strong>
+
+                <span data-user-role>
+                    Student
+                </span>
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <p class="nav-label">
+                WORKSPACE
+            </p>
+
+            <button
+                class="nav-item active"
+                data-view="dashboardView"
+            >
+                <span>⌂</span>
+                Dashboard
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="chatView"
+            >
+                <span>✦</span>
+                AI Tutor
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="libraryView"
+            >
+                <span>▣</span>
+                Library
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="notesView"
+            >
+                <span>☷</span>
+                Smart Notes
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="quizView"
+            >
+                <span>✓</span>
+                Quizzes
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="plannerView"
+            >
+                <span>▦</span>
+                Study Planner
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="timerView"
+            >
+                <span>◷</span>
+                Focus Timer
+            </button>
+
+            <button
+                class="nav-item"
+                data-view="documentsView"
+            >
+                <span>▤</span>
+                Document Studio
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="streak-card">
+
+                <div class="streak-icon">
+                    🔥
+                </div>
+
+                <div>
+                    <strong>Study Streak</strong>
+                    <span>Keep going!</span>
+                </div>
+
+                <b>7</b>
+
+            </div>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                ↪ Log out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="mobile-brand">
+                <div class="brand-logo small">✦</div>
+                <strong>StudyMate</strong>
+            </div>
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    id="globalSearch"
+                    type="search"
+                    placeholder="Search StudyMate..."
+                >
+
+                <kbd>Ctrl K</kbd>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    title="Notifications"
+                >
+                    ♢
+                </button>
+
+                <div class="top-profile">
+                    <div class="mini-avatar">👤</div>
+
+                    <div>
+                        <strong data-user-role>
+                            Student
+                        </strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================= -->
+
+        <section
+            id="dashboardView"
+            class="view active"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        YOUR PERSONAL WORKSPACE
+                    </span>
+
+                    <h1>
+                        Good to see you,
+                        <span data-user-role>Student</span> ✨
+                    </h1>
+
+                    <p>
+                        Everything you need to learn,
+                        create and stay organized.
+                    </p>
+                </div>
+
+                <button
+                    class="gradient-btn"
+                    data-action="tutor"
+                >
+                    <span>✦</span>
+                    Ask StudyMate
+                </button>
+
+            </div>
+
+
+            <!-- HERO -->
+
+            <div class="dashboard-hero">
+
+                <div class="hero-content">
+
+                    <span class="hero-tag">
+                        AI-POWERED LEARNING
+                    </span>
+
+                    <h2>
+                        Your ideas.
+                        <br>
+                        <span>Smarter learning.</span>
+                    </h2>
+
+                    <p>
+                        Ask questions, understand difficult concepts,
+                        create notes and build your perfect study plan.
+                    </p>
+
+                    <button
+                        class="hero-button"
+                        data-action="tutor"
+                    >
+                        Start learning
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+                <div class="hero-orbit">
+
+                    <div class="orbit-ring ring-one"></div>
+                    <div class="orbit-ring ring-two"></div>
+
+                    <div class="hero-core">
+                        ✦
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ROLE FACILITIES -->
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Your StudyMate Toolkit</h2>
+                    <p>
+                        Personalized for your role
+                    </p>
+                </div>
+
+            </div>
+
+            <div
+                class="role-tools"
+                data-role-tools
+            ></div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Quick Start</h2>
+                    <p>
+                        Jump into what you need
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <button
+                    class="quick-card violet"
+                    data-action="tutor"
+                >
+                    <div class="quick-icon">✦</div>
+
+                    <div>
+                        <strong>AI Tutor</strong>
+                        <span>Ask anything and learn</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+
+                <button
+                    class="quick-card teal"
+                    data-action="summarize"
+                >
+                    <div class="quick-icon">☷</div>
+
+                    <div>
+                        <strong>Smart Notes</strong>
+                        <span>Summarize your material</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+
+                <button
+                    class="quick-card pink"
+                    data-action="quiz"
+                >
+                    <div class="quick-icon">✓</div>
+
+                    <div>
+                        <strong>Make a Quiz</strong>
+                        <span>Test your knowledge</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+
+                <button
+                    class="quick-card yellow"
+                    data-action="plan"
+                >
+                    <div class="quick-icon">▦</div>
+
+                    <div>
+                        <strong>Build a Plan</strong>
+                        <span>Organize your study time</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+
+                <button
+                    class="quick-card blue"
+                    data-action="timer"
+                >
+                    <div class="quick-icon">◷</div>
+
+                    <div>
+                        <strong>Focus Timer</strong>
+                        <span>Start a deep-work session</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+
+                <button
+                    class="quick-card green"
+                    data-action="library"
+                >
+                    <div class="quick-icon">▣</div>
+
+                    <div>
+                        <strong>Study Library</strong>
+                        <span>Organize your resources</span>
+                    </div>
+
+                    <b>→</b>
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon violet-bg">
+                        ◷
+                    </div>
+
+                    <div>
+                        <span>Study Progress</span>
+                        <strong data-progress>0%</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon teal-bg">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Completed Tasks</span>
+                        <strong data-completed-count>0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon pink-bg">
+                        ▣
+                    </div>
+
+                    <div>
+                        <span>Library Materials</span>
+                        <strong data-library-count>0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon yellow-bg">
+                        🔥
+                    </div>
+
+                    <div>
+                        <span>Study Streak</span>
+                        <strong>7 days</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TODAY -->
+
+            <div class="two-column">
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Today's Study Plan</h2>
+                            <p>Your tasks for today</p>
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-action="plan"
+                        >
+                            View all →
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="dashboardTasks"
+                        class="dashboard-task-list"
+                    >
+
+                        <div class="empty-state">
+                            Add tasks in Study Planner.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel progress-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Weekly Progress</h2>
+                            <p>Keep building momentum</p>
+                        </div>
+
+                    </div>
+
+                    <div class="weekly-chart">
+
+                        <div class="chart-column">
+                            <span style="height:35%"></span>
+                            <small>Mon</small>
+                        </div>
+
+                        <div class="chart-column">
+                            <span style="height:55%"></span>
+                            <small>Tue</small>
+                        </div>
+
+                        <div class="chart-column">
+                            <span style="height:40%"></span>
+                            <small>Wed</small>
+                        </div>
+
+                        <div class="chart-column">
+                            <span style="height:70%"></span>
+                            <small>Thu</small>
+                        </div>
+
+                        <div class="chart-column">
+                            <span style="height:60%"></span>
+                            <small>Fri</small>
+                        </div>
+
+                        <div class="chart-column">
+                            <span style="height:80%"></span>
+                            <small>Sat</small>
+                        </div>
+
+                        <div class="chart-column today">
+                            <span style="height:45%"></span>
+                            <small>Sun</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI TUTOR
+        ================================================= -->
+
+        <section
+            id="chatView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        AI LEARNING ASSISTANT
+                    </span>
+
+                    <h1>AI Tutor</h1>
+
+                    <p>
+                        Ask questions and learn concepts
+                        in simple language.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="chat-layout">
+
+                <div class="chat-panel">
+
+                    <div
+                        id="chatMessages"
+                        class="chat-messages"
+                    >
+
+                        <div class="message assistant-message">
+
+                            <div class="message-avatar">
+                                ✦
+                            </div>
+
+                            <div class="message-content">
+
+                                <strong>
+                                    Hi! I'm your StudyMate AI Tutor.
+                                </strong>
+
+                                <p>
+                                    What would you like to learn today?
+                                    I can explain concepts, create examples,
+                                    help with revision and more.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="suggestion-row">
+
+                        <button
+                            data-prompt="Explain this topic in simple words"
+                        >
+                            Explain simply
+                        </button>
+
+                        <button
+                            data-prompt="Give me exam revision notes"
+                        >
+                            Revision notes
+                        </button>
+
+                        <button
+                            data-prompt="Give me an example"
+                        >
+                            Give an example
+                        </button>
+
+                        <button
+                            data-prompt="Quiz me on this topic"
+                        >
+                            Quiz me
+                        </button>
+
+                    </div>
+
+
+                    <form
+                        id="chatForm"
+                        class="chat-composer"
+                    >
+
+                        <input
+                            id="chatInput"
+                            type="text"
+                            placeholder="Ask StudyMate anything..."
+                            autocomplete="off"
+                        >
+
+                        <button type="submit">
+                            ↑
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LIBRARY
+        ================================================= -->
+
+        <section
+            id="libraryView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        YOUR RESOURCES
+                    </span>
+
+                    <h1>Study Library</h1>
+
+                    <p>
+                        Keep your study material organized.
+                    </p>
+                </div>
+
+                <label class="gradient-btn upload-btn">
+
+                    <span>＋</span>
+                    Upload Material
+
+                    <input
+                        id="fileInput"
+                        type="file"
+                        multiple
+                        hidden
+                    >
+
+                </label>
+
+            </div>
+
+
+            <div
+                id="libraryGrid"
+                class="library-grid"
+            >
+
+                <div class="empty-state">
+                    Your study library is empty.
+                    Upload notes, PDFs or study material to begin.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NOTES
+        ================================================= -->
+
+        <section
+            id="notesView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        INTELLIGENT NOTES
+                    </span>
+
+                    <h1>Smart Notes</h1>
+
+                    <p>
+                        Turn long material into useful revision notes.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="notes-layout">
+
+                <div class="notes-editor panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Source Material</h2>
+                            <p>
+                                Paste your notes below
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <textarea
+                        id="notesInput"
+                        placeholder="Paste your study material here..."
+                    ></textarea>
+
+                    <button
+                        id="summarizeBtn"
+                        class="gradient-btn"
+                    >
+                        ✦ Create Summary
+                    </button>
+
+                </div>
+
+
+                <div class="notes-output panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Study Notes</h2>
+                            <p>
+                                Your generated summary
+                            </p>
+                        </div>
+
+                        <button
+                            id="copyNotesBtn"
+                            class="small-btn"
+                        >
+                            Copy
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="notesOutput"
+                        class="notes-result"
+                    >
+
+                        <div class="empty-state">
+                            Your summary will appear here.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUIZ
+        ================================================= -->
+
+        <section
+            id="quizView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        ACTIVE RECALL
+                    </span>
+
+                    <h1>Quiz Generator</h1>
+
+                    <p>
+                        Generate practice questions and test yourself.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quiz-builder panel">
+
+                <div class="quiz-input-row">
+
+                    <input
+                        id="quizTopic"
+                        type="text"
+                        placeholder="Enter a topic — e.g. DBMS, Python, Data Structures"
+                    >
+
+                    <button
+                        id="generateQuizBtn"
+                        class="gradient-btn"
+                    >
+                        Generate Quiz
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="quizContainer"
+                class="quiz-container panel"
+            >
+
+                <div class="empty-state">
+                    Enter a topic above to generate a quiz.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PLANNER
+        ================================================= -->
+
+        <section
+            id="plannerView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        PLAN YOUR PROGRESS
+                    </span>
+
+                    <h1>Study Planner</h1>
+
+                    <p>
+                        Turn your goals into manageable tasks.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="planner-layout">
+
+                <div class="panel planner-add">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Add Study Task</h2>
+                            <p>
+                                What do you want to accomplish?
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <form id="taskForm">
+
+                        <input
+                            id="taskTitle"
+                            type="text"
+                            placeholder="Task name"
+                        >
+
+                        <input
+                            id="taskSubject"
+                            type="text"
+                            placeholder="Subject"
+                        >
+
+                        <button
+                            type="submit"
+                            class="gradient-btn"
+                        >
+                            + Add Task
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <h2>Your Tasks</h2>
+                            <p>
+                                Stay consistent
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="taskList"
+                        class="task-list"
+                    >
+
+                        <div class="empty-state">
+                            No study tasks yet.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel timetable-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h2>Weekly Timetable</h2>
+                        <p>
+                            A simple overview of your week
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="timetable">
+
+                    <div>
+                        <strong>Monday</strong>
+                        <span>DBMS</span>
+                        <span>Programming</span>
+                    </div>
+
+                    <div>
+                        <strong>Tuesday</strong>
+                        <span>Data Structures</span>
+                        <span>Revision</span>
+                    </div>
+
+                    <div>
+                        <strong>Wednesday</strong>
+                        <span>Mathematics</span>
+                        <span>Practice</span>
+                    </div>
+
+                    <div>
+                        <strong>Thursday</strong>
+                        <span>DBMS</span>
+                        <span>Quiz Practice</span>
+                    </div>
+
+                    <div>
+                        <strong>Friday</strong>
+                        <span>Programming</span>
+                        <span>Revision</span>
+                    </div>
+
+                    <div>
+                        <strong>Saturday</strong>
+                        <span>Mock Test</span>
+                        <span>Review</span>
+                    </div>
+
+                    <div>
+                        <strong>Sunday</strong>
+                        <span>Weekly Review</span>
+                        <span>Planning</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TIMER
+        ================================================= -->
+
+        <section
+            id="timerView"
+            class="view"
+        >
+
+            <div class="page-heading centered-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        DEEP WORK
+                    </span>
+
+                    <h1>Focus Timer</h1>
+
+                    <p>
+                        Protect your attention and study consistently.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="timer-panel panel">
+
+                <div class="timer-modes">
+
+                    <button
+                        data-timer="focus"
+                        class="timer-mode active"
+                    >
+                        Focus · 25m
+                    </button>
+
+                    <button
+                        data-timer="short"
+                        class="timer-mode"
+                    >
+                        Short Break · 5m
+                    </button>
+
+                    <button
+                        data-timer="long"
+                        class="timer-mode"
+                    >
+                        Long Break · 15m
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="timer-ring"
+                    data-timer-ring
+                >
+
+                    <div class="timer-inner">
+
+                        <span
+                            data-timer-display
+                            class="timer-display"
+                        >
+                            25:00
+                        </span>
+
+                        <small>
+                            Focus Session
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timer-controls">
+
+                    <button
+                        id="timerStart"
+                        class="gradient-btn timer-start"
+                    >
+                        Start Focus
+                    </button>
+
+                    <button
+                        id="timerReset"
+                        class="small-btn"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+
+                <div class="timer-tip">
+
+                    <span>💡</span>
+
+                    <p>
+                        Put your phone away, choose one task,
+                        and focus until the timer ends.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DOCUMENT STUDIO
+        ================================================= -->
+
+        <section
+            id="documentsView"
+            class="view"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        CREATE & ORGANIZE
+                    </span>
+
+                    <h1>Document Studio</h1>
+
+                    <p>
+                        Create study-ready documents and resources.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="document-tools">
+
+                <button
+                    class="document-card violet"
+                    data-create-document="pdf"
+                >
+
+                    <div class="document-icon">
+                        📕
+                    </div>
+
+                    <strong>
+                        PDF Notes
+                    </strong>
+
+                    <span>
+                        Create structured study notes
+                    </span>
+
+                    <b>→</b>
+
+                </button>
+
+
+                <button
+                    class="document-card teal"
+                    data-create-document="ppt"
+                >
+
+                    <div class="document-icon">
+                        📊
+                    </div>
+
+                    <strong>
+                        PowerPoint
+                    </strong>
+
+                    <span>
+                        Build presentation outlines
+                    </span>
+
+                    <b>→</b>
+
+                </button>
+
+
+                <button
+                    class="document-card blue"
+                    data-create-document="excel"
+                >
+
+                    <div class="document-icon">
+                        📈
+                    </div>
+
+                    <strong>
+                        Excel Tracker
+                    </strong>
+
+                    <span>
+                        Track your revision
+                    </span>
+
+                    <b>→</b>
+
+                </button>
+
+
+                <button
+                    class="document-card pink"
+                    data-create-document="flashcards"
+                >
+
+                    <div class="document-icon">
+                        🗂️
+                    </div>
+
+                    <strong>
+                        Flashcards
+                    </strong>
+
+                    <span>
+                        Create quick-revision cards
+                    </span>
+
+                    <b>→</b>
+
+                </button>
+
+            </div>
+
+
+            <div class="panel document-preview-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h2>Document Preview</h2>
+                        <p>
+                            Your generated content
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="documentPreview"
+                    class="document-preview"
+                >
+
+                    <div class="empty-state">
+                        Choose a document type above.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     COMMAND PALETTE
+===================================================== -->
+
+<div
+    id="commandPalette"
+    class="command-overlay"
+>
+
+    <div class="command-box">
+
+        <div class="command-search">
+
+            <span>⌕</span>
+
+            <input
+                id="commandInput"
+                placeholder="Search StudyMate..."
+            >
+
+            <kbd>ESC</kbd>
+
+        </div>
+
+
+        <div class="command-list">
+
+            <button data-command="dashboardView">
+                <span>⌂</span>
+                Dashboard
+            </button>
+
+            <button data-command="chatView">
+                <span>✦</span>
+                AI Tutor
+            </button>
+
+            <button data-command="libraryView">
+                <span>▣</span>
+                Library
+            </button>
+
+            <button data-command="notesView">
+                <span>☷</span>
+                Smart Notes
+            </button>
+
+            <button data-command="quizView">
+                <span>✓</span>
+                Quizzes
+            </button>
+
+            <button data-command="plannerView">
+                <span>▦</span>
+                Study Planner
+            </button>
+
+            <button data-command="timerView">
+                <span>◷</span>
+                Focus Timer
+            </button>
+
+            <button data-command="documentsView">
+                <span>▤</span>
+                Document Studio
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
 
 <script src="script.js"></script>
+
 </body>
 </html>
