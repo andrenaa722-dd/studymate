@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StudyMate — Your Study Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">✦</span>
+    <span class="brand-name">StudyMate</span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="timetable">Timetable</button>
+    <button class="tab-btn" data-tab="timer">Focus Timer</button>
+    <button class="tab-btn" data-tab="notes">Notes</button>
+    <button class="tab-btn" data-tab="flashcards">Flashcards</button>
+    <button class="tab-btn" data-tab="videos">Videos</button>
+  </nav>
+  <div class="streak-pill" id="streakPill">🔥 0 day streak</div>
+</header>
+
+<main>
+
+  <!-- TIMETABLE -->
+  <section class="panel active" id="panel-timetable">
+    <div class="panel-head">
+      <div>
+        <h1>Your week, at a glance</h1>
+        <p class="sub">Click any empty slot to plan a study block. Blocks light up amber when active, and turn green once you finish them.</p>
+      </div>
+      <div class="head-actions">
+        <select id="examSubjectSelect"></select>
+        <input type="date" id="examDateInput" />
+        <button class="btn btn-ghost" id="autoPlanBtn">Auto-plan to exam</button>
+      </div>
+    </div>
+
+    <div class="legend" id="subjectLegend"></div>
+
+    <div class="grid-wrap">
+      <div class="grid" id="timetableGrid"></div>
+    </div>
+  </section>
+
+  <!-- TIMER -->
+  <section class="panel" id="panel-timer">
+    <div class="panel-head">
+      <div>
+        <h1>Focus session</h1>
+        <p class="sub">Pick a subject, set your time, and go dark on everything else.</p>
+      </div>
+    </div>
+
+    <div class="timer-layout">
+      <div class="timer-card">
+        <div class="timer-ring-wrap">
+          <svg viewBox="0 0 200 200" class="timer-ring">
+            <circle cx="100" cy="100" r="90" class="ring-bg"></circle>
+            <circle cx="100" cy="100" r="90" class="ring-progress" id="ringProgress"></circle>
+          </svg>
+          <div class="timer-display">
+            <span id="timerClock">25:00</span>
+            <span class="timer-label" id="timerSubjectLabel">No subject selected</span>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="startPauseBtn">Start</button>
+          <button class="btn btn-ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="timer-setup">
+        <label>Subject</label>
+        <select id="timerSubjectSelect"></select>
+
+        <label>Duration</label>
+        <div class="duration-chips" id="durationChips">
+          <button class="chip" data-min="15">15m</button>
+          <button class="chip active" data-min="25">25m</button>
+          <button class="chip" data-min="45">45m</button>
+          <button class="chip" data-min="60">60m</button>
+        </div>
+
+        <label>Intention <span class="optional">(what does "done" look like?)</span></label>
+        <input type="text" id="timerIntention" placeholder="e.g. finish 2 practice problems" />
+
+        <div class="session-log">
+          <h3>Recent sessions</h3>
+          <ul id="sessionLogList"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="panel" id="panel-notes">
+    <div class="panel-head">
+      <div>
+        <h1>Notes → summaries → flashcards</h1>
+        <p class="sub">Paste or type your notes. StudyMate pulls out key points and can spin flashcards from them.</p>
+      </div>
+    </div>
+
+    <div class="notes-layout">
+      <div class="notes-editor">
+        <select id="noteSubjectSelect"></select>
+        <textarea id="noteInput" placeholder="Paste your notes, textbook paragraph, or lecture summary here..."></textarea>
+        <div class="notes-actions">
+          <button class="btn btn-primary" id="summarizeBtn">Summarize &amp; save</button>
+        </div>
+      </div>
+
+      <div class="notes-list" id="notesList">
+        <p class="empty-state">No notes yet — your saved summaries will appear here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section class="panel" id="panel-flashcards">
+    <div class="panel-head">
+      <div>
+        <h1>Flashcards</h1>
+        <p class="sub">Cards you rate "hard" come back sooner. Cards you know well fade into the background.</p>
+      </div>
+      <button class="btn btn-ghost" id="addCardBtn">+ New card</button>
+    </div>
+
+    <div class="flash-stats" id="flashStats"></div>
+
+    <div class="flash-stage" id="flashStage">
+      <p class="empty-state">No cards due right now. Add one, or come back later.</p>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section class="panel" id="panel-videos">
+    <div class="panel-head">
+      <div>
+        <h1>Find a video for this</h1>
+        <p class="sub">Type whatever you're stuck on. StudyMate builds a targeted search instead of a generic one.</p>
+      </div>
+    </div>
+
+    <div class="video-search">
+      <input type="text" id="videoTopicInput" placeholder="e.g. integration by parts, Krebs cycle, big-O notation..." />
+      <button class="btn btn-primary" id="videoSearchBtn">Find videos</button>
+    </div>
+
+    <div class="video-quick-tags" id="videoQuickTags"></div>
+
+    <div class="video-results" id="videoResults"></div>
+  </section>
+
+</main>
+
+<div class="modal-backdrop" id="cardModalBackdrop">
+  <div class="modal">
+    <h2>New flashcard</h2>
+    <label>Subject</label>
+    <select id="cardSubjectSelect"></select>
+    <label>Front (question)</label>
+    <textarea id="cardFront" rows="2"></textarea>
+    <label>Back (answer)</label>
+    <textarea id="cardBack" rows="2"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="cancelCardBtn">Cancel</button>
+      <button class="btn btn-primary" id="saveCardBtn">Save card</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
